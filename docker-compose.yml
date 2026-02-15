@@ -1,0 +1,17 @@
+services:
+  claude-code:
+    build: .
+    container_name: claude-code-container
+    volumes:
+      - ${WORKSPACE_DIR:-./workspace}:/workspace
+      - claude-config:/home/claude/.config/claude-code
+    environment:
+      - NODE_ENV=production
+    stdin_open: true
+    tty: true
+    user: "1001:1001"
+    network_mode: bridge
+    working_dir: /workspace
+
+volumes:
+  claude-config:
