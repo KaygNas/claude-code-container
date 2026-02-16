@@ -1,13 +1,18 @@
-FROM node:20-slim
+FROM node:22-slim
 
 # 安装必要的系统依赖
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update 
+RUN apt-get install -y --no-install-recommends \
     git \
     curl \
-    && rm -rf /var/lib/apt/lists/*
+    vim 
+RUN rm -rf /var/lib/apt/lists/*
 
 # 安装 Claude Code CLI（以 root 安装，所有用户可用）
 RUN npm install -g @anthropic-ai/claude-code
+
+# 安装 pnpm
+RUN npm install -g pnpm
 
 USER root
 
