@@ -10,10 +10,8 @@ services:
       - claude-config:/home/claude/.config/claude-code
     environment:
       - NODE_ENV=production
-      - GLM_TOKEN=${GLM_TOKEN}
     stdin_open: true
     tty: true
-    user: "1001:1001"
     network_mode: bridge
     working_dir: /workspace
     deploy:
