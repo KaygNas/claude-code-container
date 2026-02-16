@@ -1,17 +1,29 @@
 services:
   claude-code:
-    build: .
+    build:
+      context: .
+      args:
+        - GLM_TOKEN=${GLM_TOKEN}
     container_name: claude-code-container
     volumes:
       - ${WORKSPACE_DIR:-./workspace}:/workspace
       - claude-config:/home/claude/.config/claude-code
     environment:
       - NODE_ENV=production
+      - GLM_TOKEN=${GLM_TOKEN}
     stdin_open: true
     tty: true
     user: "1001:1001"
     network_mode: bridge
     working_dir: /workspace
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4G
+        reservations:
+          cpus: '2.0'
+          memory: 2G
 
 volumes:
   claude-config:
